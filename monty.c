@@ -10,6 +10,7 @@ void init_ins(void)
 	ins = malloc(sizeof(instruction_t));
 	if (!ins)
 	{
+		fflush(NULL);
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
@@ -48,6 +49,7 @@ int main(int argc, char *argv[])
 		assign_f();
 		if (ins->f == NULL)
 		{
+			fflush(NULL);
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_n, strtok(line, " "));
 			free_stack(stack);
 			free(ins);

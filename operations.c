@@ -39,6 +39,7 @@ void push(stack_t **stack, unsigned int line_number, FILE *input)
 
 	if (!ins->opcode || !is_num(ins->opcode))
 	{
+		fflush(NULL);
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		fclose(input);
 		free_stack(*stack);
@@ -48,6 +49,7 @@ void push(stack_t **stack, unsigned int line_number, FILE *input)
 	new_node = malloc(sizeof(stack_t));
 	if (!new_node)
 	{
+		fflush(NULL);
 		fprintf(stderr, "Error: malloc failed\n");
 		fclose(input);
 		free_stack(*stack);
@@ -73,6 +75,7 @@ void pop(stack_t **stack, unsigned int line_number, FILE *input)
 
 	if (stack_len(*stack) == 0)
 	{
+		fflush(NULL);
 		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
 		fclose(input);
 		free_stack(*stack);
@@ -119,6 +122,7 @@ void pint(stack_t **stack, unsigned int line_number, FILE *input)
 {
 	if (stack_len(*stack) == 0)
 	{
+		fflush(NULL);
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
 		fclose(input);
 		free_stack(*stack);
