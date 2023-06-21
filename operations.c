@@ -16,6 +16,8 @@ int is_num(char *str)
 	len = strlen(str);
 	for (i = 0; i < len; i++)
 	{
+		if (i == 0 && (str[i] == '-' || str[i] == '+'))
+			continue;
 		if (i == len - 1 && str[i] == '\n')
 			continue;
 		if (str[i] < '0' || str[i] > '9')
