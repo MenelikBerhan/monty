@@ -107,10 +107,26 @@ void pstr(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 */
 void rotl(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
+	int len;
+	stack_t *last, *first;
+
 	(void)input;
-	(void)stack;
 	(void)l_num;
 	(void)ins;
+	len = stack_len(*stack);
+	if (len < 2)
+		return;
+	first = last = *stack;
+	while (len > 1)
+	{
+		last = last->next;
+		len--;
+	}
+	last->next = first;
+	*stack = first->next;
+	(first->next)->prev = NULL;
+	first->next = NULL;
+	first->prev = last;
 }
 
 /**
@@ -123,8 +139,25 @@ void rotl(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 */
 void rotr(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
+	int len;
+	stack_t *last, *first, *bfr_last;
+
 	(void)input;
-	(void)stack;
 	(void)l_num;
 	(void)ins;
+	len = stack_len(*stack);
+	if (len < 2)
+		return;
+	first = bfr_last = *stack;
+	while (len > 2)
+	{
+		bfr_last = bfr_last->next;
+		len--;
+	}
+	last = bfr_last->next;
+	*stack = last;
+	bfr_last->next = NULL;
+	first->prev = last;
+	last->prev = NULL;
+	last->next = first;
 }
