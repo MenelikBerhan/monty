@@ -14,6 +14,7 @@ void _stack(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 	(void)stack;
 	(void)l_num;
 	(void)ins;
+	mode = 0;
 }
 
 /**
@@ -30,6 +31,7 @@ void queue(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 	(void)stack;
 	(void)l_num;
 	(void)ins;
+	mode = 1;
 }
 
 /**

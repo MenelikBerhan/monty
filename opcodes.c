@@ -1,28 +1,24 @@
 #include "monty.h"
 
 /**
- * is_num - checks if all characters in string str are digits
- * @str: string to be checked
+ * push_helper - checks if proper argument is provided for push
+ * @stack: pointer to a stack_t list
+ * @l_num: line number of push command in file argument
+ * @input: stream created from file argument
+ * @ins: pointer to an ins_t type
  *
- * Return: 1 if all characters are digits or 0 otherwise.
 */
-int is_num(char *str)
+void push_helper(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
-	int len, i;
-
-	if (!str)
-		return (0);
-	len = strlen(str);
-	for (i = 0; i < len; i++)
+	if (!ins->opcode || !is_num(ins->opcode))
 	{
-		if (i == 0 && (str[i] == '-' || str[i] == '+'))
-			continue;
-		if (i == len - 1 && str[i] == '\n')
-			continue;
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
+		fflush(NULL);
+		fprintf(stderr, "L%u: usage: push integer\n", l_num);
+		fclose(input);
+		free_stack(*stack);
+		free(ins);
+		exit(EXIT_FAILURE);
 	}
-	return (1);
 }
 
 /**
@@ -35,17 +31,10 @@ int is_num(char *str)
 */
 void push(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
-	stack_t *new_node;
+	stack_t *new_node, *last_node;
+	int len;
 
-	if (!ins->opcode || !is_num(ins->opcode))
-	{
-		fflush(NULL);
-		fprintf(stderr, "L%u: usage: push integer\n", l_num);
-		fclose(input);
-		free_stack(*stack);
-		free(ins);
-		exit(EXIT_FAILURE);
-	}
+	push_helper(stack, l_num, input, ins);
 	new_node = malloc(sizeof(stack_t));
 	if (!new_node)
 	{
@@ -56,10 +45,30 @@ void push(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 		free(ins);
 		exit(EXIT_FAILURE);
 	}
-	new_node->n = atoi(ins->opcode);
-	new_node->prev = NULL;
-	new_node->next = *stack;
-	*stack = new_node;
+	if (mode == 0)
+	{
+		new_node->n = atoi(ins->opcode);
+		new_node->prev = NULL;
+		new_node->next = *stack;
+		*stack = new_node;
+	}
+	else
+	{
+		new_node->n = atoi(ins->opcode);
+		new_node->next = NULL;
+		len = stack_len(*stack);
+		last_node = *stack;
+		while (len > 1)
+		{
+			last_node = last_node->next;
+			len--;
+		}
+		if (!last_node)
+			*stack = new_node;
+		else
+			last_node->next = new_node;
+		new_node->prev = last_node ? last_node : NULL;
+	}
 }
 
 /**

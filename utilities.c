@@ -83,3 +83,28 @@ void free_stack(stack_t *head)
 		free(temp);
 	}
 }
+
+/**
+ * is_num - checks if all characters in string str are digits
+ * @str: string to be checked
+ *
+ * Return: 1 if all characters are digits or 0 otherwise.
+*/
+int is_num(char *str)
+{
+	int len, i;
+
+	if (!str)
+		return (0);
+	len = strlen(str);
+	for (i = 0; i < len; i++)
+	{
+		if (i == 0 && (str[i] == '-' || str[i] == '+'))
+			continue;
+		if (i == len - 1 && str[i] == '\n')
+			continue;
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+	}
+	return (1);
+}
