@@ -82,7 +82,7 @@ void sub(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 		free(ins);
 		exit(EXIT_FAILURE);
 	}
-	diff = (*stack)->n - ((*stack)->next)->n;
+	diff = ((*stack)->next)->n - (*stack)->n;
 	temp = *stack;
 	*stack = (*stack)->next;
 	(*stack)->prev = NULL;
