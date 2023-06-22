@@ -37,6 +37,9 @@ void swap(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 */
 void add(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
+	int sum;
+	stack_t *temp;
+
 	if (stack_len(*stack) < 2)
 	{
 		fflush(NULL);
@@ -46,7 +49,13 @@ void add(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 		free(ins);
 		exit(EXIT_FAILURE);
 	}
-
+	sum = (*stack)->n + ((*stack)->next)->n;
+	/* pop(stack, l_num, input, ins); */
+	temp = *stack;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
+	(*stack)->n = sum;
+	free(temp);
 }
 
 /**
@@ -61,10 +70,19 @@ void add(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 */
 void sub(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
-	(void)input;
-	(void)stack;
-	(void)l_num;
-	(void)ins;
+	int diff;
+	if (stack_len(*stack) < 2)
+	{
+		fflush(NULL);
+		fprintf(stderr, "L%u: can't sub, stack too short\n", l_num);
+		fclose(input);
+		free_stack(*stack);
+		free(ins);
+		exit(EXIT_FAILURE);
+	}
+	diff = (*stack)->n - ((*stack)->next)->n;
+	pop(stack, l_num, input, ins);
+	(*stack)->n = diff;
 }
 
 /**
