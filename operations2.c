@@ -3,30 +3,50 @@
 /**
  * swap - swaps the most top and bottom integers from the stack
  * @stack: pointer to a stack_t list
- * @line_number: line number of push command in file argument
+ * @l_num: line number of push command in file argument
  * @input: stream created from file argument
+ * @ins: pointer to an ins_t type
  *
 */
-void swap(stack_t **stack, unsigned int line_number, FILE *input)
+void swap(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
-	(void)input;
-	(void)stack;
-	(void)line_number;
+	int temp;
+
+	if (stack_len(*stack) < 2)
+	{
+		fflush(NULL);
+		fprintf(stderr, "L%u: can't swap, stack too short\n", l_num);
+		fclose(input);
+		free_stack(*stack);
+		free(ins);
+		exit(EXIT_FAILURE);
+	}
+	temp = (*stack)->n;
+	(*stack)->n = ((*stack)->next)->n;
+	((*stack)->next)->n = temp;
 }
 
 /**
  * add - adds the two most top integers from the stack and adds
  *	the result on top of the stack after removing the two integers
  * @stack: pointer to a stack_t list
- * @line_number: line number of push command in file argument
+ * @l_num: line number of push command in file argument
  * @input: stream created from file argument
+ * @ins: pointer to an ins_t type
  *
 */
-void add(stack_t **stack, unsigned int line_number, FILE *input)
+void add(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
-	(void)input;
-	(void)stack;
-	(void)line_number;
+	if (stack_len(*stack) < 2)
+	{
+		fflush(NULL);
+		fprintf(stderr, "L%u: can't add, stack too short\n", l_num);
+		fclose(input);
+		free_stack(*stack);
+		free(ins);
+		exit(EXIT_FAILURE);
+	}
+
 }
 
 /**
@@ -34,15 +54,17 @@ void add(stack_t **stack, unsigned int line_number, FILE *input)
  *	in the stack and adds the result on top of the stack after removing
  *	the two integers
  * @stack: pointer to a stack_t list
- * @line_number: line number of push command in file argument
+ * @l_num: line number of push command in file argument
  * @input: stream created from file argument
+ * @ins: pointer to an ins_t type
  *
 */
-void sub(stack_t **stack, unsigned int line_number, FILE *input)
+void sub(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
 	(void)input;
 	(void)stack;
-	(void)line_number;
+	(void)l_num;
+	(void)ins;
 }
 
 /**
@@ -50,28 +72,32 @@ void sub(stack_t **stack, unsigned int line_number, FILE *input)
  *	the stack and adds the result on top of the stack after removing
  *	the two integers
  * @stack: pointer to a stack_t list
- * @line_number: line number of push command in file argument
+ * @l_num: line number of push command in file argument
  * @input: stream created from file argument
+ * @ins: pointer to an ins_t type
  *
 */
-void _div(stack_t **stack, unsigned int line_number, FILE *input)
+void _div(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
 	(void)input;
 	(void)stack;
-	(void)line_number;
+	(void)l_num;
+	(void)ins;
 }
 
 /**
  * mul - multiplies the two most top integers from the stack with each other
  *	and adds the result on top of the stack after removing the two integers
  * @stack: pointer to a stack_t list
- * @line_number: line number of push command in file argument
+ * @l_num: line number of push command in file argument
  * @input: stream created from file argument
+ * @ins: pointer to an ins_t type
  *
 */
-void mul(stack_t **stack, unsigned int line_number, FILE *input)
+void mul(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
 	(void)input;
 	(void)stack;
-	(void)line_number;
+	(void)l_num;
+	(void)ins;
 }

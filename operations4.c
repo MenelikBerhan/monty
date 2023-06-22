@@ -3,41 +3,47 @@
 /**
  * _stack - sets the format of the data to a queue (FIFO)
  * @stack: pointer to a stack_t list
- * @line_number: line number of push command in file argument
+ * @l_num: line number of push command in file argument
  * @input: stream created from file argument
+ * @ins: pointer to an ins_t type
  *
 */
-void _stack(stack_t **stack, unsigned int line_number, FILE *input)
+void _stack(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
 	(void)input;
 	(void)stack;
-	(void)line_number;
+	(void)l_num;
+	(void)ins;
 }
 
 /**
  * queue - sets the format of the data to a queue (FIFO)
  * @stack: pointer to a stack_t list
- * @line_number: line number of push command in file argument
+ * @l_num: line number of push command in file argument
  * @input: stream created from file argument
+ * @ins: pointer to an ins_t type
  *
 */
-void queue(stack_t **stack, unsigned int line_number, FILE *input)
+void queue(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
 	(void)input;
 	(void)stack;
-	(void)line_number;
+	(void)l_num;
+	(void)ins;
 }
 
 /**
  * nop - does nothing
  * @stack: pointer to a stack_t list
- * @line_number: line number of push command in file argument
+ * @l_num: line number of push command in file argument
  * @input: stream created from file argument
+ * @ins: pointer to an ins_t type
  *
 */
-void nop(stack_t **stack, unsigned int line_number, FILE *input)
+void nop(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
 	(void)input;
 	(void)stack;
-	(void)line_number;
+	(void)l_num;
+	(void)ins;
 }

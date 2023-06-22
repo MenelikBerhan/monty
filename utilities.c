@@ -2,9 +2,10 @@
 
 /**
  * assign_f - assigns a function to handle the op code in ins
+ * @ins: pointer to an ins_t type
  *
 */
-void assign_f(void)
+void assign_f(ins_t *ins)
 {
 	char *op;
 

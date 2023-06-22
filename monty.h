@@ -32,30 +32,31 @@ typedef struct stack_s
 typedef struct instruction_s
 {
 		char *opcode;
-		void (*f)(stack_t **stack, unsigned int line_number, FILE *input);
-} instruction_t;
-instruction_t *ins;
+		void (*f)(stack_t **stack, unsigned int l_num, FILE *input,
+					struct instruction_s *ins);
+} ins_t;
 
 
-void push(stack_t **stack, unsigned int line_number, FILE *input);
-void pop(stack_t **stack, unsigned int line_number, FILE *input);
-void pall(stack_t **stack, unsigned int line_number, FILE *input);
-void pint(stack_t **stack, unsigned int line_number, FILE *input);
-void swap(stack_t **stack, unsigned int line_number, FILE *input);
-void add(stack_t **stack, unsigned int line_number, FILE *input);
-void nop(stack_t **stack, unsigned int line_number, FILE *input);
-void sub(stack_t **stack, unsigned int line_number, FILE *input);
-void _div(stack_t **stack, unsigned int line_number, FILE *input);
-void mul(stack_t **stack, unsigned int line_number, FILE *input);
-void mod(stack_t **stack, unsigned int line_number, FILE *input);
-void pchar(stack_t **stack, unsigned int line_number, FILE *input);
-void pstr(stack_t **stack, unsigned int line_number, FILE *input);
-void rotl(stack_t **stack, unsigned int line_number, FILE *input);
-void rotr(stack_t **stack, unsigned int line_number, FILE *input);
-void _stack(stack_t **stack, unsigned int line_number, FILE *input);
-void queue(stack_t **stack, unsigned int line_number, FILE *input);
 
-void assign_f(void);
+void push(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+void pop(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+void pall(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+void pint(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+void swap(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+void add(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+void nop(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+void sub(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+void _div(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+void mul(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+void mod(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+void pchar(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+void pstr(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+void rotl(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+void rotr(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+void _stack(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+void queue(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
+
+void assign_f(ins_t *ins);
 size_t stack_len(const stack_t *h);
 void free_stack(stack_t *head);
 
