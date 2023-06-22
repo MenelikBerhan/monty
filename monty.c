@@ -63,6 +63,7 @@ int main(int argc, char *argv[])
 	}
 	input = init_stream(argv[1]);
 	ins = init_ins();
+	mode = 0;
 	while (fgets(line, 1023, input))
 	{
 		line_n++;

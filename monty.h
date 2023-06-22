@@ -36,6 +36,8 @@ typedef struct instruction_s
 					struct instruction_s *ins);
 } ins_t;
 
+int mode;/* 0 for stack, 1 fro queue */
+
 void push(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
 void pop(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
 void pall(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
@@ -57,5 +59,6 @@ void queue(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
 void assign_f(ins_t *ins);
 size_t stack_len(const stack_t *h);
 void free_stack(stack_t *head);
+int is_num(char *str);
 
 #endif
