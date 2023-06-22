@@ -71,6 +71,8 @@ void add(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 void sub(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
 	int diff;
+	stack_t *temp;
+
 	if (stack_len(*stack) < 2)
 	{
 		fflush(NULL);
@@ -81,8 +83,11 @@ void sub(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 		exit(EXIT_FAILURE);
 	}
 	diff = (*stack)->n - ((*stack)->next)->n;
-	pop(stack, l_num, input, ins);
+	temp = *stack;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
 	(*stack)->n = diff;
+	free(temp);
 }
 
 /**
