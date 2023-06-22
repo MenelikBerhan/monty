@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
 			free(ins);
 			exit(EXIT_FAILURE);
 		}
-		ins->opcode = ins->f == push ? strtok(NULL, " /n") : ins->opcode;
+		ins->opcode = ins->f == push ? strtok(NULL, " \n") : ins->opcode;
 		ins->f(&stack, line_n, input);
 	}
 	fclose(input);
