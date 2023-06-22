@@ -1,5 +1,4 @@
 #include "monty.h"
-#include <ctype.h>
 
 /**
  * is_num - checks if all characters in string str are digits

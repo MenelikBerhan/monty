@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * assign_f - assigns a function to handle the op code in ins
+ * assign_f - assigns a function to handle the opcode in ins
  * @ins: pointer to an ins_t type
  *
 */
@@ -32,7 +32,7 @@ void assign_f(ins_t *ins)
 		ins->f = mul;
 	else if (!strncmp(op, "mod", 3) && strlen(op) == 3)
 		ins->f = mod;
-	else if (!strncmp(op, "pchar", 4) && strlen(op) == 4)
+	else if (!strncmp(op, "pchar", 5) && strlen(op) == 5)
 		ins->f = pchar;
 	else if (!strncmp(op, "pstr", 4) && strlen(op) == 4)
 		ins->f = pstr;
@@ -60,26 +60,6 @@ size_t stack_len(const stack_t *h)
 
 	while (h)
 	{
-		len++;
-		h = h->next;
-	}
-
-	return (len);
-}
-
-/**
- * print_stack - prints all nodes of a doubly linked stack_t list
- * @h: a doubly linked stack_t list
- *
- * Return: number of nodes in h
-*/
-size_t print_stack(const stack_t *h)
-{
-	size_t len = 0;
-
-	while (h)
-	{
-		printf("%d\n", h->n);
 		len++;
 		h = h->next;
 	}

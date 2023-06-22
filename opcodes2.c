@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * swap - swaps the most top and bottom integers from the stack
+ * swap - swaps the top and bottom integers from the stack
  * @stack: pointer to a stack_t list
  * @l_num: line number of push command in file argument
  * @input: stream created from file argument
@@ -27,8 +27,8 @@ void swap(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 }
 
 /**
- * add - adds the two most top integers from the stack and adds
- *	the result on top of the stack after removing the two integers
+ * add - adds the two top integers from the stack and adds the result
+ *	on top of the stack after removing the two integers
  * @stack: pointer to a stack_t list
  * @l_num: line number of push command in file argument
  * @input: stream created from file argument
@@ -50,7 +50,6 @@ void add(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 		exit(EXIT_FAILURE);
 	}
 	sum = (*stack)->n + ((*stack)->next)->n;
-	/* pop(stack, l_num, input, ins); */
 	temp = *stack;
 	*stack = (*stack)->next;
 	(*stack)->prev = NULL;
@@ -59,9 +58,8 @@ void add(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 }
 
 /**
- * sub - subtracts the second most top integer from the most top integer
- *	in the stack and adds the result on top of the stack after removing
- *	the two integers
+ * sub - subtracts the second top integer from the top integer in the stack
+ *	and adds the result on top of the stack after removing the two integers
  * @stack: pointer to a stack_t list
  * @l_num: line number of push command in file argument
  * @input: stream created from file argument
@@ -91,9 +89,8 @@ void sub(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 }
 
 /**
- * _div - divdes the most top integer with the second most top integer from
- *	the stack and adds the result on top of the stack after removing
- *	the two integers
+ * _div - divdes the second top integer with the top integer from the stack
+ *	and adds the result on top of the stack after removing the two integers
  * @stack: pointer to a stack_t list
  * @l_num: line number of push command in file argument
  * @input: stream created from file argument
@@ -102,15 +99,38 @@ void sub(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 */
 void _div(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
-	(void)input;
-	(void)stack;
-	(void)l_num;
-	(void)ins;
+	int result;
+	stack_t *temp;
+
+	if (stack_len(*stack) < 2)
+	{
+		fflush(NULL);
+		fprintf(stderr, "L%u: can't div, stack too short\n", l_num);
+		fclose(input);
+		free_stack(*stack);
+		free(ins);
+		exit(EXIT_FAILURE);
+	}
+	if ((*stack)->n == 0)
+	{
+		fflush(NULL);
+		fprintf(stderr, "L%u: division by zero\n", l_num);
+		fclose(input);
+		free_stack(*stack);
+		free(ins);
+		exit(EXIT_FAILURE);
+	}
+	result = ((*stack)->next)->n / (*stack)->n;
+	temp = *stack;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
+	(*stack)->n = result;
+	free(temp);
 }
 
 /**
- * mul - multiplies the two most top integers from the stack with each other
- *	and adds the result on top of the stack after removing the two integers
+ * mul - multiplies the two top integers from the stack with each other and
+ *	adds the result on top of the stack after removing the two integers
  * @stack: pointer to a stack_t list
  * @l_num: line number of push command in file argument
  * @input: stream created from file argument
@@ -119,8 +139,22 @@ void _div(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 */
 void mul(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins)
 {
-	(void)input;
-	(void)stack;
-	(void)l_num;
-	(void)ins;
+	int result;
+	stack_t *temp;
+
+	if (stack_len(*stack) < 2)
+	{
+		fflush(NULL);
+		fprintf(stderr, "L%u: can't mul, stack too short\n", l_num);
+		fclose(input);
+		free_stack(*stack);
+		free(ins);
+		exit(EXIT_FAILURE);
+	}
+	result = ((*stack)->next)->n * (*stack)->n;
+	temp = *stack;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
+	(*stack)->n = result;
+	free(temp);
 }

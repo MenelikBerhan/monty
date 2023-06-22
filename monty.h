@@ -36,8 +36,6 @@ typedef struct instruction_s
 					struct instruction_s *ins);
 } ins_t;
 
-
-
 void push(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
 void pop(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
 void pall(stack_t **stack, unsigned int l_num, FILE *input, ins_t *ins);
