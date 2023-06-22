@@ -50,7 +50,7 @@ FILE *init_stream(char *file_name)
 int main(int argc, char *argv[])
 {
 	FILE *input;
-	char line[100];
+	char line[1024];
 	unsigned int line_n = 0;
 	stack_t *stack = NULL;
 	ins_t *ins;
