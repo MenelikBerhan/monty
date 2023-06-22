@@ -34,6 +34,7 @@ FILE *init_stream(char *file_name)
 	stream = fopen(file_name, "r");
 	if (!stream)
 	{
+		fflush(NULL);
 		fprintf(stderr, "Error: Can't open file %s\n", file_name);
 		exit(EXIT_FAILURE);
 	}
@@ -71,6 +72,7 @@ int main(int argc, char *argv[])
 		{
 			fflush(NULL);
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_n, strtok(line, " "));
+			fclose(input);
 			free_stack(stack);
 			free(ins);
 			exit(EXIT_FAILURE);
