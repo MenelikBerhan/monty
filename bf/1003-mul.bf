@@ -107,3 +107,7 @@ print the two digits
     <<          move pointer two steps at a time backwards to first zero cell        
 ]
 >>.             print the cell after moving pointer two places forward
+[
+-               decrease current cell till 0
+]
++++++ +++++ .   add 10 and print "\n"
